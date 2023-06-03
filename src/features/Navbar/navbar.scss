@@ -1,0 +1,89 @@
+.navbar-ctn {
+  background-color: #0f0f0f;
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  justify-content: space-between;
+  .navbar-logo-ctn {
+    display: flex;
+    align-items: center;
+    .navbar-icon-ctn {
+      height: fit-content;
+      width: fit-content;
+      align-items: center;
+      display: flex;
+      margin: 0 10px;
+      &:hover {
+        cursor: pointer;
+      }
+      .navbar-logo-title {
+        font-weight: 600;
+        text-align: center;
+        color: white;
+        font-size: 16px;
+      }
+    }
+    .navbar-menu-ctn {
+      height: 40px;
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 5px;
+      box-sizing: border-box;
+      &:hover {
+        background-color: #222222;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .search-ctn {
+    width: 30%;
+    position: relative;
+    &:hover {
+      cursor: pointer;
+    }
+    .search-icon-ctn {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      padding-top: 10px;
+      padding-right: 15px;
+      padding: 10px 15px 0 15px;
+      background-color: #222222;
+      height: 100%;
+      box-sizing: border-box;
+      border-top-right-radius: 24px;
+      border-bottom-right-radius: 24px;
+      border-color: #222222;
+    }
+  }
+  .notification-profile-ctn {
+    display: flex;
+    align-items: center;
+    .notification-shortcut {
+      border-radius: 50%;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      &:hover {
+        background-color: #222222;
+        cursor: pointer;
+      }
+    }
+    .profile-shortcut {
+      border-radius: 50%;
+      padding: 7px;
+      width: 20px;
+      height: 20px;
+      background-color: #c2175b;
+      margin: 0 15px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

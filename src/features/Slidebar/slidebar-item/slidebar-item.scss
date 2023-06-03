@@ -1,0 +1,14 @@
+.slidebar-item-ctn {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px;
+  border-radius: 10px;
+  &:hover {
+    background-color: #222222;
+  }
+  p {
+    margin: 0;
+    font-size: 15px;
+    text-align: center;
+  }
+}
