@@ -16,12 +16,20 @@ function App() {
       element: <Counter />,
     },
     {
-      path: "/channel/:id",
+      path: ENUM_PAGE.SUBSCRIPTION,
       element: <Counter />,
     },
     {
       path: "/search/:searchTerm",
       element: <Counter />,
+    },
+    {
+      path: ENUM_PAGE.LIBRARY,
+      element: <VideoFeedComponent />,
+    },
+    {
+      path: ENUM_PAGE.HISTORY,
+      element: <VideoFeedComponent />,
     },
     {
       path: "/dashboard",

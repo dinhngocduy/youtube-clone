@@ -1,8 +1,17 @@
 .slidebar-item-ctn {
   display: flex;
   align-items: center;
-  padding: 10px 10px;
+  padding: 10px 20px;
   border-radius: 10px;
+  &.active {
+    svg {
+      transform: rotate(180deg);
+      animation: rotation 2s infinite linear;
+      path {
+        fill: white;
+      }
+    }
+  }
   &:hover {
     background-color: #222222;
   }
@@ -10,5 +19,13 @@
     margin: 0;
     font-size: 15px;
     text-align: center;
+  }
+}
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
   }
 }

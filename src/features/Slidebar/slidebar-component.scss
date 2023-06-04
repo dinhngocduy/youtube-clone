@@ -6,3 +6,15 @@
     font-weight: 600;
   }
 }
+.shorts-icon {
+  fill: black;
+  stroke: white;
+  stroke-width: 40;
+
+  &.active {
+    path:nth-child(2) {
+      fill: black !important;
+      stroke: black !important;
+    }
+  }
+}

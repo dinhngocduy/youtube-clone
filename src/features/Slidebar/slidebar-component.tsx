@@ -1,9 +1,14 @@
-import React from "react";
 import "./slidebar-component.scss";
 import { useAppSelector } from "../../app/hooks";
 import { selectSlideBarActive } from "../../app/Slices/slideBarActiveSlice";
 import SlidebarItemComponent from "./slidebar-item/slidebar-item";
-import { HomeIcon } from "../../libraries/icons/icon";
+import {
+  HomeIcon,
+  YoutubeHistory,
+  YoutubeLibrary,
+  YoutubeShorts,
+  YoutubeSub,
+} from "../../libraries/icons/icon";
 import { NavLink } from "react-router-dom";
 import { ENUM_PAGE } from "../../libraries/ultils/enums/page";
 const SlidebarComponent = () => {
@@ -12,10 +17,10 @@ const SlidebarComponent = () => {
   return (
     <div
       className="slidebar-ctn"
-      style={{ width: slidebarActive ? "200px" : "50px" }}
+      style={{ width: slidebarActive ? "200px" : "60px" }}
     >
       <NavLink
-        to={ENUM_PAGE.DASHBOARD}
+        to={"/"}
         className={({ isActive }) => "nav-link" + (isActive ? " selected" : "")}
       >
         {({ isActive }) => (
@@ -23,7 +28,7 @@ const SlidebarComponent = () => {
             <HomeIcon />
             <p
               style={{
-                fontSize: slidebarActive ? "15px" : "10px",
+                fontSize: slidebarActive ? "15px" : isActive ? "12px" : "10px",
                 marginLeft: slidebarActive ? "20px" : "0",
                 marginTop: slidebarActive ? "0" : "10px",
               }}
@@ -39,10 +44,12 @@ const SlidebarComponent = () => {
       >
         {({ isActive }) => (
           <SlidebarItemComponent isActive={isActive}>
-            <HomeIcon />
+            <YoutubeShorts
+              className={"shorts-icon" + (isActive ? " active" : "")}
+            />
             <p
               style={{
-                fontSize: slidebarActive ? "15px" : "10px",
+                fontSize: slidebarActive ? "15px" : isActive ? "12px" : "10px",
                 marginLeft: slidebarActive ? "20px" : "0",
                 marginTop: slidebarActive ? "0" : "10px",
               }}
@@ -53,12 +60,15 @@ const SlidebarComponent = () => {
         )}
       </NavLink>
       <NavLink
-        to={ENUM_PAGE.SHORTS}
+        to={ENUM_PAGE.SUBSCRIPTION}
         className={({ isActive }) => "nav-link" + (isActive ? " selected" : "")}
       >
         {({ isActive }) => (
           <SlidebarItemComponent isActive={isActive}>
-            <HomeIcon />
+            <YoutubeSub
+              fill={isActive ? "white" : "black"}
+              stroke={isActive ? "none" : "white"}
+            />
             <p
               style={{
                 fontSize: slidebarActive ? "15px" : "10px",
@@ -71,13 +81,24 @@ const SlidebarComponent = () => {
           </SlidebarItemComponent>
         )}
       </NavLink>
+      <div
+        style={{
+          width: "100%",
+          borderBottom: "1px solid #3f3f3f",
+          margin: "5px 0",
+          display: slidebarActive ? "block" : "none",
+        }}
+      />
       <NavLink
-        to={ENUM_PAGE.SHORTS}
+        to={ENUM_PAGE.LIBRARY}
         className={({ isActive }) => "nav-link" + (isActive ? " selected" : "")}
       >
         {({ isActive }) => (
           <SlidebarItemComponent isActive={isActive}>
-            <HomeIcon />
+            <YoutubeLibrary
+              stroke={isActive ? "none" : "white"}
+              fill={isActive ? "white" : "black"}
+            />
             <p
               style={{
                 fontSize: slidebarActive ? "15px" : "10px",
@@ -86,6 +107,28 @@ const SlidebarComponent = () => {
               }}
             >
               Library
+            </p>
+          </SlidebarItemComponent>
+        )}
+      </NavLink>
+      <NavLink
+        to={ENUM_PAGE.HISTORY}
+        className={({ isActive }) => "nav-link" + (isActive ? " selected" : "")}
+      >
+        {({ isActive }) => (
+          <SlidebarItemComponent isActive={isActive} hideable={!slidebarActive}>
+            <YoutubeHistory
+              stroke={isActive ? "white" : "none"}
+              strokeWidth={isActive ? 3 : 1}
+            />
+            <p
+              style={{
+                fontSize: slidebarActive ? "15px" : "10px",
+                marginLeft: slidebarActive ? "20px" : "0",
+                marginTop: slidebarActive ? "0" : "10px",
+              }}
+            >
+              Watched videos
             </p>
           </SlidebarItemComponent>
         )}
