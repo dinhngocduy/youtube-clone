@@ -8,9 +8,11 @@ import {
   YoutubeLibrary,
   YoutubeShorts,
   YoutubeSub,
+  YoutubeYourVideo,
 } from "../../libraries/icons/icon";
 import { NavLink } from "react-router-dom";
 import { ENUM_PAGE } from "../../libraries/ultils/enums/page";
+import { Height } from "@mui/icons-material";
 const SlidebarComponent = () => {
   const slidebarActive = useAppSelector(selectSlideBarActive);
 
@@ -129,6 +131,37 @@ const SlidebarComponent = () => {
               }}
             >
               Watched videos
+            </p>
+          </SlidebarItemComponent>
+        )}
+      </NavLink>
+      <NavLink
+        to={ENUM_PAGE.HISTORY}
+        className={({ isActive }) => "nav-link" + (isActive ? " selected" : "")}
+      >
+        {({ isActive }) => (
+          <SlidebarItemComponent isActive={isActive} hideable={!slidebarActive}>
+            <div style={{
+              width:"20px",
+              height:"20px",
+              border:"1px solid white",
+              display:"flex",
+              justifyContent:"center",
+              alignItems:"center",
+              paddingLeft:"2px",
+              boxSizing:"border-box"
+              
+            }}>
+              <YoutubeYourVideo/>
+            </div>
+            <p
+              style={{
+                fontSize: slidebarActive ? "15px" : "10px",
+                marginLeft: slidebarActive ? "20px" : "0",
+                marginTop: slidebarActive ? "0" : "10px",
+              }}
+            > 
+             Your videos
             </p>
           </SlidebarItemComponent>
         )}
