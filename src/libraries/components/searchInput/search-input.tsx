@@ -7,12 +7,14 @@ type Props = {
 const SearchInputComponent = (props: Props) => {
   const { onChange } = props;
   return (
-    <input
-      type="text"
-      className="input-ctn"
-      onChange={onChange}
-      placeholder="Search..."
-    />
+    <form action="#">
+      <input
+        type="text"
+        className="input-ctn"
+        onChange={onChange}
+        placeholder="Search..."
+      />
+    </form>
   );
 };
 

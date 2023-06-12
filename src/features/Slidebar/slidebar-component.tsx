@@ -130,7 +130,7 @@ const SlidebarComponent = () => {
                 marginTop: slidebarActive ? "0" : "10px",
               }}
             >
-              Watched videos
+              History
             </p>
           </SlidebarItemComponent>
         )}
@@ -141,18 +141,19 @@ const SlidebarComponent = () => {
       >
         {({ isActive }) => (
           <SlidebarItemComponent isActive={isActive} hideable={!slidebarActive}>
-            <div style={{
-              width:"20px",
-              height:"20px",
-              border:"1px solid white",
-              display:"flex",
-              justifyContent:"center",
-              alignItems:"center",
-              paddingLeft:"2px",
-              boxSizing:"border-box"
-              
-            }}>
-              <YoutubeYourVideo/>
+            <div
+              style={{
+                width: "20px",
+                height: "20px",
+                border: "1px solid white",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                paddingLeft: "2px",
+                boxSizing: "border-box",
+              }}
+            >
+              <YoutubeYourVideo />
             </div>
             <p
               style={{
@@ -160,8 +161,8 @@ const SlidebarComponent = () => {
                 marginLeft: slidebarActive ? "20px" : "0",
                 marginTop: slidebarActive ? "0" : "10px",
               }}
-            > 
-             Your videos
+            >
+              Your videos
             </p>
           </SlidebarItemComponent>
         )}

@@ -43,7 +43,9 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <RouterProvider router={router} />
+      <div className="website-body">
+        <RouterProvider router={router} />
+      </div>
     </div>
   );
 }
