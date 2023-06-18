@@ -1,238 +1,151 @@
 import "./video-feed.scss";
 import SlidebarComponent from "../Slidebar/slidebar-component";
-import { v4 as uuid } from "uuid";
-import { VideoOverview } from "./components/video-overview-props";
 import VideoOverviewComponent from "./components/video-overview-component";
-type Props = {};
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { VideoList } from "../../libraries/types/listVideo";
+import { KeyValue } from "../../libraries/types/keyValues";
+type Props = {
+  searchText: string;
+  setSearchText: any;
+};
 
 const VideoFeedComponent = (props: Props) => {
-  const videoList: VideoOverview[] = [
+  const { searchText, setSearchText } = props;
+  const [videoList, setVideoList] = useState<VideoList[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  // const [selectedCategory, setSelectedCategory]
+  const categoryList: KeyValue[] = [
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId:
-        "https://yt3.ggpht.com/ytc/AGIKgqNkCooudKEIk6MEJTIkBhmyDq1dU8zdJCxEDqiT=s68-c-k-c0x00ffffff-no-rj",
-      views: 3400,
-      createdAt: "15 minutes ago",
-    },
-
-    {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId:
-        "https://yt3.ggpht.com/ytc/AGIKgqNkCooudKEIk6MEJTIkBhmyDq1dU8zdJCxEDqiT=s68-c-k-c0x00ffffff-no-rj",
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "All",
+      key: "",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId:
-        "https://yt3.ggpht.com/ytc/AGIKgqNkCooudKEIk6MEJTIkBhmyDq1dU8zdJCxEDqiT=s68-c-k-c0x00ffffff-no-rj",
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "Movies",
+      key: "Movies",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId:
-        "https://yt3.ggpht.com/ytc/AGIKgqNkCooudKEIk6MEJTIkBhmyDq1dU8zdJCxEDqiT=s68-c-k-c0x00ffffff-no-rj",
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "Music",
+      key: "Music",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId:
-        "https://yt3.ggpht.com/ytc/AGIKgqNkCooudKEIk6MEJTIkBhmyDq1dU8zdJCxEDqiT=s68-c-k-c0x00ffffff-no-rj",
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "Dramas",
+      key: "Dramas",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId:
-        "https://yt3.ggpht.com/ytc/AGIKgqNkCooudKEIk6MEJTIkBhmyDq1dU8zdJCxEDqiT=s68-c-k-c0x00ffffff-no-rj",
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "Gaming",
+      key: "Gaming",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId:
-        "https://yt3.ggpht.com/ytc/AGIKgqNkCooudKEIk6MEJTIkBhmyDq1dU8zdJCxEDqiT=s68-c-k-c0x00ffffff-no-rj",
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "Masterchef",
+      key: "Masterchef",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId:
-        "https://yt3.ggpht.com/ytc/AGIKgqNkCooudKEIk6MEJTIkBhmyDq1dU8zdJCxEDqiT=s68-c-k-c0x00ffffff-no-rj",
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "Dota 2",
+      key: "Dota 2",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId:
-        "https://yt3.ggpht.com/ytc/AGIKgqNkCooudKEIk6MEJTIkBhmyDq1dU8zdJCxEDqiT=s68-c-k-c0x00ffffff-no-rj",
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "Computer programming",
+      key: "Computer programming",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId:
-        "https://yt3.ggpht.com/ytc/AGIKgqNkCooudKEIk6MEJTIkBhmyDq1dU8zdJCxEDqiT=s68-c-k-c0x00ffffff-no-rj",
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "FNAF",
+      key: "FNAF",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId:
-        "https://yt3.ggpht.com/ytc/AGIKgqNkCooudKEIk6MEJTIkBhmyDq1dU8zdJCxEDqiT=s68-c-k-c0x00ffffff-no-rj",
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "Live",
+      key: "Live",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId:
-        "https://yt3.ggpht.com/ytc/AGIKgqNkCooudKEIk6MEJTIkBhmyDq1dU8zdJCxEDqiT=s68-c-k-c0x00ffffff-no-rj",
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "Reactjs",
+      key: "Reactjs",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId: uuid(),
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "Android studio",
+      key: "Android studio",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId: uuid(),
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "Macbook",
+      key: "Macbook",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId: uuid(),
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "Gordon Ramsay",
+      key: "Gordon Ramsay",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId: uuid(),
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "Medical dramas",
+      key: "Medical dramas",
     },
     {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId: uuid(),
-      views: 3400,
-      createdAt: "15 minutes ago",
-    },
-    {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId: uuid(),
-      views: 3400,
-      createdAt: "15 minutes ago",
-    },
-    {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId: uuid(),
-      views: 3400,
-      createdAt: "15 minutes ago",
-    },
-    {
-      id: uuid(),
-      thumbnail:
-        "https://i.ytimg.com/vi/q5DBN-wWOEU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCt2dONFe8SeBCScDF4Gb1whTknVw",
-      title: "Take Your Bets! Who's The Father? | House M.D.",
-      channelName: "House M.D.",
-      channelId:
-        "https://yt3.ggpht.com/ytc/AGIKgqNkCooudKEIk6MEJTIkBhmyDq1dU8zdJCxEDqiT=s68-c-k-c0x00ffffff-no-rj",
-      views: 3400,
-      createdAt: "15 minutes ago",
+      value: "Scene",
+      key: "Scene",
     },
   ];
-  console.log(videoList);
+  const fetchData = async () => {
+    const options = {
+      method: "GET",
+      url: "https://youtube-v31.p.rapidapi.com/search",
+      params: {
+        q: searchText,
+        part: "snippet,id",
+        regionCode: "",
+        maxResults: "300",
+        // order: "date",
+      },
+      headers: {
+        "X-RapidAPI-Key": "954ca76fbfmsh77f682d5ae01c18p181550jsn7e3cdd4d1663",
+        "X-RapidAPI-Host": "youtube-v31.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+      setVideoList(response.data.items);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    setLoading(true);
+    const timeOut = setTimeout(() => {
+      fetchData();
+    }, 500);
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [searchText]);
+
   return (
     <div className="video-feed-ctn">
       <SlidebarComponent />
       <div className="video-feed-body">
-        <p>New Videos</p>
-        <div className="video-feed-list">
-          {videoList.map((video: VideoOverview) => (
-            <VideoOverviewComponent video={video} />
+        <div className="categories-ctn">
+          {categoryList.map((category) => (
+            <div
+              className={
+                "video-category" +
+                (searchText === category.key ? " active" : "")
+              }
+              key={category.key}
+              onClick={() => {
+                setSearchText(category.key);
+              }}
+            >
+              <p>{category.value}</p>
+            </div>
           ))}
         </div>
+        {loading ? (
+          <p style={{ textAlign: "center" }}>Loading...</p>
+        ) : (
+          <div className="video-feed-list">
+            {videoList?.map((video: VideoList) => (
+              <VideoOverviewComponent video={video} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ const SearchInputComponent = (props: Props) => {
       <input
         type="text"
         className="input-ctn"
-        onChange={onChange}
+        onChange={(e) => onChange(e.target.value)}
         placeholder="Search..."
       />
     </form>

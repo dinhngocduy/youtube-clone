@@ -4,8 +4,11 @@ import { Counter } from "./features/counter/Counter";
 import Navbar from "./features/Navbar/navbar";
 import VideoFeedComponent from "./features/Dashboard/video-feed-component";
 import { ENUM_PAGE } from "./libraries/ultils/enums/page";
+import { useState } from "react";
 
 function App() {
+  const [searchText, setSearchText] = useState<string>("");
+
   const router = createBrowserRouter([
     {
       path: ENUM_PAGE.SHORTS,
@@ -25,24 +28,29 @@ function App() {
     },
     {
       path: ENUM_PAGE.LIBRARY,
-      element: <VideoFeedComponent />,
+      element: <Counter />,
     },
     {
       path: ENUM_PAGE.HISTORY,
-      element: <VideoFeedComponent />,
+      element: <Counter />,
     },
     {
       path: "/dashboard",
-      element: <VideoFeedComponent />,
+      element: <Counter />,
     },
     {
       path: "/",
-      element: <VideoFeedComponent />,
+      element: (
+        <VideoFeedComponent
+          setSearchText={setSearchText}
+          searchText={searchText}
+        />
+      ),
     },
   ]);
   return (
     <div className="App">
-      <Navbar />
+      <Navbar setSearchText={setSearchText} />
       <div className="website-body">
         <RouterProvider router={router} />
       </div>

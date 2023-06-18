@@ -1,5 +1,5 @@
 .video-overview-ctn {
-  width: 355px;
+  width: 320px;
   height: 300px;
   margin: 0 10px;
   margin-bottom: 40px;
@@ -12,21 +12,53 @@
     }
   }
   .thumbnail-ctn {
-    flex: 1;
-    height: 200px;
+    // flex: 1;
+    width: 100%;
+    height: 180px;
     img {
-      height: 100%;
-      width: 100%;
+      &:hover {
+        transform: scale(1.005);
+      }
+      height: 180px;
+      width: 320px;
       border-radius: 16px;
+      transition: transform 0.5s; /* Animation */
     }
   }
   .video-info-ctn {
     display: flex;
-    margin-top: 10px;
+    padding-top: 10px;
     overflow: hidden;
+    position: relative;
+    &:hover {
+      .menu-dots {
+        display: flex;
+      }
+    }
+    .menu-dots {
+      position: absolute;
+      right: 0;
+      margin-bottom: 50px !important;
+      height: 30px;
+      width: 30px;
+      margin-top: -3px;
+      padding: 2px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      svg {
+        height: 18px;
+        width: 18px;
+      }
+      &:active {
+        background-color: #272727;
+      }
+    }
     img {
       border-radius: 50%;
       height: 36px;
+      border: 1px solid gray;
       width: 36px;
       margin-right: 15px;
     }
@@ -35,16 +67,34 @@
         font-size: 16px;
         font-weight: 500;
         margin: 0 !important;
-        padding-right: 24px;
-        line-height: 24px;
-        text-align: start;
-        height: 44px;
+        padding-right: 50px;
         overflow: hidden;
         display: -webkit-box;
+        -webkit-line-clamp: 2 !important;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3; /* start showing ellipsis when 3rd line is reached */
-        white-space: pre-wrap; /* let the text wrap preserving spaces */
+        width: 220px;
+        text-align: start;
+        /* let the text wrap preserving spaces */
         margin-right: 24px;
+      }
+      .channel-title {
+        font-family: "Roboto", "Arial", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        // margin-top: 10px;
+        color: #aaaaaa;
+      }
+      .views-createdAt {
+        display: flex;
+        font-size: 14px;
+        color: #aaaaaa;
+        align-items: center;
+        margin-top: 10px;
+        flex-wrap: wrap;
+        .video-createdAt::before {
+          content: "•";
+          margin: 0 4px;
+        }
       }
     }
   }

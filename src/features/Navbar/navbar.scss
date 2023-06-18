@@ -83,7 +83,13 @@
       height: 20px;
       background-color: #c2175b;
       margin: 0 15px;
-
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      p {
+        margin: 0;
+      }
       &:hover {
         cursor: pointer;
       }

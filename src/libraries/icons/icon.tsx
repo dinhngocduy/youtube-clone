@@ -8,6 +8,7 @@ import { ReactComponent as YoutubeSub } from "./svgs/Pictogrammers-Material-Yout
 import { ReactComponent as YoutubeLibrary } from "./svgs/-video-library_90558.svg";
 import { ReactComponent as YoutubeHistory } from "./svgs/youtube-history.svg";
 import { ReactComponent as YoutubeYourVideo } from "./svgs/youtube-your-video.svg";
+import { ReactComponent as MenuDots } from "./svgs/menu-dots.svg";
 
 export {
   YoutubeIcon,
@@ -19,5 +20,6 @@ export {
   YoutubeSub,
   YoutubeLibrary,
   YoutubeHistory,
-  YoutubeYourVideo
+  YoutubeYourVideo,
+  MenuDots,
 };

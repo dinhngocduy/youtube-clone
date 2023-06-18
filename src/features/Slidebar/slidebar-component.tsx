@@ -12,14 +12,13 @@ import {
 } from "../../libraries/icons/icon";
 import { NavLink } from "react-router-dom";
 import { ENUM_PAGE } from "../../libraries/ultils/enums/page";
-import { Height } from "@mui/icons-material";
 const SlidebarComponent = () => {
   const slidebarActive = useAppSelector(selectSlideBarActive);
 
   return (
     <div
       className="slidebar-ctn"
-      style={{ width: slidebarActive ? "200px" : "60px" }}
+      style={{ width: slidebarActive ? "230px" : "60px" }}
     >
       <NavLink
         to={"/"}

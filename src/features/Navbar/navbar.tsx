@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./navbar.scss";
 import {
   MenuIcon,
@@ -9,10 +8,12 @@ import {
 import { toggle } from "../../app/Slices/slideBarActiveSlice";
 import SearchInputComponent from "../../libraries/components/searchInput/search-input";
 import { useAppDispatch } from "../../app/hooks";
-type Props = {};
+type Props = {
+  setSearchText: any;
+};
 
 const Navbar = (props: Props) => {
-  const [searchText, setSearchText] = useState<string>();
+  const { setSearchText } = props;
   const dispatch = useAppDispatch();
   return (
     <div className="navbar-ctn">
@@ -40,7 +41,9 @@ const Navbar = (props: Props) => {
         <div className="notification-shortcut">
           <NotificationIcon />
         </div>
-        <div className="profile-shortcut">D</div>
+        <div className="profile-shortcut">
+          <p>D</p>
+        </div>
       </div>
     </div>
   );
