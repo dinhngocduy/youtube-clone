@@ -93,7 +93,7 @@ const VideoFeedComponent = (props: Props) => {
         // order: "date",
       },
       headers: {
-        "X-RapidAPI-Key": "954ca76fbfmsh77f682d5ae01c18p181550jsn7e3cdd4d1663",
+        "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
         "X-RapidAPI-Host": "youtube-v31.p.rapidapi.com",
       },
     };
