@@ -90,7 +90,7 @@ const VideoFeedComponent = (props: Props) => {
         part: "snippet,id",
         regionCode: "",
         maxResults: "300",
-        // order: "date",
+        order: "date",
       },
       headers: {
         "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,

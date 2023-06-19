@@ -15,7 +15,7 @@ function App() {
       element: <Counter />,
     },
     {
-      path: "/video/:id",
+      path: "/watch/:id",
       element: <Counter />,
     },
     {
